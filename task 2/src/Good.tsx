@@ -1,27 +1,35 @@
-
-interface GoodProps{
-    key:number;
-    selectedGood: string;
-    item:string;
-    removeGood: ()=> void;
-    addGood: (item:string)=> void;
-
-
-
+import './index.css'
+ 
+interface GoodProps {
+  isSelected: boolean;
+  item: string;
+  removeGood: () => void;
+  addGood: (item: string) => void;
+  showAddBtn: string;
 }
 
-export default function Good(props:GoodProps) {
+export default function Good({isSelected, item, removeGood, addGood, showAddBtn}: GoodProps) {
   return (
     <>
-        <li key={props.key} style={{display:"flex", alignItems: "center" }}>
-       
-       {props.selectedGood === props.item ? (
-       <button onClick={()=> {props.removeGood()}}>-</button>)
-       :
-         (<button onClick={()=> {props.addGood(props.item)}}>+</button>
-         )}
-          <div>{props.item}</div>
-     </li>
+      <li>
+        {isSelected ? (
+          <button
+            onClick={() => 
+            removeGood()}
+          >
+            -
+          </button>
+        ) : (
+            // showAddBtn &&
+          <button
+            onClick={() => 
+              addGood(item)}
+          >
+            +
+          </button>
+        )}
+        <div>{item}</div>
+      </li>
     </>
-  )
+  );
 }
